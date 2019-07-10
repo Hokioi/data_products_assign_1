@@ -1,4 +1,6 @@
 ---
+title: Assignment 1 for Developing Data Products course
+date: 10 July, 2019
 output: html_document
 ---
 
