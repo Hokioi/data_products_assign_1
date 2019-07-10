@@ -1,0 +1,43 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Map of Tangle, Dangle and Mangle's awesome holiday in the central North Island
+
+New Zealand's favourite monsters had a lot of fun holidaying in the central North Island in 2015!  
+Here is a map of their adventures. Follow the links to see photos and videos.
+
+```{r load_packages, warning = FALSE}
+
+library(leaflet)
+
+```
+
+```{r upload_data}
+
+dat <- read.csv("monsters_data.csv")
+
+Mangle <- makeIcon(iconUrl = "Mangle alone.png", iconWidth = 30, iconHeight = 50, iconAnchorX = 15, iconAnchorY = 50)
+
+```
+
+```{r make_map}
+
+monstermap <- dat %>%
+              leaflet() %>%
+              addTiles() %>%
+              addMarkers(lat = dat$lat, 
+                         lng = dat$long,
+                         popup = paste0("<a href=", dat$URL, ">", dat$event, "</a>"),
+                         clusterOptions = markerClusterOptions(),
+                         icon = Mangle
+                         )
+
+monstermap
+
+```
+
